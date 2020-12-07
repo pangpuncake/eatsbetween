@@ -9,7 +9,15 @@ const Form = () => {
     const addLocationHandler = () => {
         setFormInputs([...formInputs, `Location ${count}`])
         setCount(count + 1)
-        console.log("clicked")
+    }
+
+    const deleteLocationHandler = () => {
+        if (count <= 3) {
+            alert("Minimum of 2 locations is required!")
+            return;
+        }
+        setFormInputs([...formInputs].slice(0, formInputs.length - 1))
+        setCount(count - 1)
     }
 
     const [count, setCount] = useState(3)
@@ -19,7 +27,7 @@ const Form = () => {
     const resultInputs = formInputs.map(i => {
         return (
             <div key = {i} className="input-container">
-                <TextField id={i} label={i} variant="outlined" fullWidth />
+                <TextField id={i} label={i} variant="outlined" fullWidth required />
             </div>
         )
     })
@@ -28,12 +36,19 @@ const Form = () => {
     <div className="form">
         <div className="information">
             <h2>Set the locations of everyone here!</h2>
-            {/*<p>Count: {count}</p>*/}
+            <div className="button-container">
+                <Button variant="contained" color="default">Find Your Eatery!</Button>
+            </div>
         </div>
         <div className="form-container">
             <form noValidate autoComplete="off">
                 {resultInputs}
-                <Button variant = "contained" color="primary" onClick={() => addLocationHandler()}>Add More Locations</Button>
+                <div className="button-container">
+                    <Button variant="outlined" color="primary" onClick={() => addLocationHandler()}>Add More Locations</Button>
+                </div>
+                <div className="button-container">
+                    <Button variant="outlined" color="default" onClick={() => deleteLocationHandler()}>Delete Last Location</Button>
+                </div>
             </form>
         </div>
     </div>

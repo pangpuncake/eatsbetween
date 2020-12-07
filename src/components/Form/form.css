@@ -31,4 +31,9 @@
 
 .information h2 {
   text-align: center;
+  display: inline-block;
+}
+
+.button-container {
+  margin: 2%
 }
